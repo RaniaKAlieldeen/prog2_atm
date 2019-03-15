@@ -1,0 +1,35 @@
+		long cardNumber ;
+		int pin  ;
+		Account account = new Account(1065649569,0000,0) ;
+		Transaction t = new Transaction();
+		Scanner input = new Scanner(System.in);
+		System.out.println("enter card number: ");
+		cardNumber = input.nextLong();
+		if(t.checkCardNumber(account, cardNumber)) {
+			System.out.println("enter pin: ");
+			pin = input.nextInt();
+			input.close();
+			if(t.checkPin(account, pin)) {
+
+					//t.balanceInquiry(account);
+					t.deposit(account, 5000);
+					t.withdraw(account, 2000);
+					t.withdraw(account, 1000);
+					//t.withdraw(account, 500);
+
+					//t.deposit(account, 1000);
+					t.balanceInquiry(account);
+					t.previousHistory(account);
+					t.previousHistory(account);
+					t.nextHistory(account);
+					t.nextHistory(account);
+					t.miniStatement(account);
+					t.changePin(account, 8261);
+					System.out.println(t.checkPin(account, 8261));
+
+			} else {
+				System.out.println("wrong pin");
+			}
+		} else {
+			System.out.println("wrong card number");
+		}
