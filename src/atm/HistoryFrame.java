@@ -35,21 +35,23 @@ public class HistoryFrame extends JFrame {
 		panel.setLayout(new GridBagLayout());
 		add(panel,BorderLayout.CENTER);
 		
-		
+//-----------------------------------------------------------------------------	
 		
 		JLabel label = new JLabel("HISTORY");
 		label.setPreferredSize(new Dimension(80,50));
 		label.setFont(new Font("calibri", Font.PLAIN, 20));
 		
-		String str1 = t.previousHistory(account);
+		String str1 = new String();//t.previousHistory(account);
 		final JLabel prev = new JLabel(str1);
 		prev.setPreferredSize(new Dimension(200,50));
 		prev.setFont(new Font("calibri", Font.PLAIN, 20));
 		
-		String str2 = t.nextHistory(account);
+		String str2 = new String();//t.nextHistory(account);
 		final JLabel next = new JLabel(str2);
 		next.setPreferredSize(new Dimension(200,50));
 		next.setFont(new Font("calibri", Font.PLAIN, 20));
+		
+//-----------------------------------------------------------------------------
 		
 		if(flag ==0)
 			next.setVisible(false);
@@ -93,6 +95,7 @@ public class HistoryFrame extends JFrame {
 			}
 		});
 		
+//-----------------------------------------------------------------------------
 		GridBagConstraints gc = new GridBagConstraints();
 		
 		gc.anchor = GridBagConstraints.CENTER;

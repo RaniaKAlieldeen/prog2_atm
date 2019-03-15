@@ -25,13 +25,18 @@ import javax.swing.border.Border;
 
 @SuppressWarnings({ "serial", "unused" })
 public class AtmHomeFrame extends JFrame {
-
-	Account account = new Account(0000, 0000, 0);
+	int[] card = { 1, 1, 1, 1, 2, 2, 2, 2, 3, 3 };
+	int[] pin = { 1, 2, 3, 4 };
+	Account account = new Account(card, pin, 0);
 	Transaction t = new Transaction();
 
 	static Dimension size = new Dimension(450, 450);
 	static Dimension btnsize = new Dimension(150, 50);
 	static Color color = Color.LIGHT_GRAY;
+
+	public void closeFrame() {
+		this.dispose();
+	}
 
 	public AtmHomeFrame() {
 
@@ -48,7 +53,7 @@ public class AtmHomeFrame extends JFrame {
 		add(panel);
 		panel.setBackground(color);
 		GridBagConstraints gc = new GridBagConstraints();
-
+//-----------------------------------------------------------------------------
 		JLabel welcomelbl = new JLabel(" Welcome To ATM Prototype");
 		welcomelbl.setFont(new Font("calibri", Font.BOLD, 20));
 		welcomelbl.setPreferredSize(new Dimension(250, 50));
@@ -72,15 +77,18 @@ public class AtmHomeFrame extends JFrame {
 		error2.setForeground(Color.RED);
 		error2.setVisible(false);
 		error2.setFont(new Font("calibri", Font.BOLD, 15));
-
+//------------------------------------------------------------------------------
 		JButton enterButton = new JButton("ENTER");
 		enterButton.setPreferredSize(btnsize);
 		enterButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String cardlbl = cardField.getText();
-				long card = 0;
+				String cardString = cardField.getText();
 				try {
-					card = Long.parseLong(cardlbl);
+
+					int[] card = new int[10];
+					for (int i = 0; i < cardString.length(); i++) {
+						card[i] = cardString.charAt(i) - '0';
+					}
 					if (t.checkCardNumber(account, card)) {
 						setVisible(false);
 						new PinFrame(account, t);
@@ -91,11 +99,13 @@ public class AtmHomeFrame extends JFrame {
 				} catch (NumberFormatException e1) {
 					error2.setVisible(true);
 					error.setVisible(false);
+				}catch (IndexOutOfBoundsException e1) {
+					error.setVisible(true);
+					error2.setVisible(false);
 				}
 			}
 		});
-		
-		
+
 		JButton exit = new JButton("EXIT");
 		exit.setPreferredSize(btnsize);
 		exit.addActionListener(new ActionListener() {
@@ -103,8 +113,8 @@ public class AtmHomeFrame extends JFrame {
 				closeFrame();
 			}
 		});
-		
 
+//---------------------------------------------------------------------------------
 		gc.anchor = GridBagConstraints.CENTER;
 		gc.gridx = 0;
 		gc.gridy = 0;
@@ -123,10 +133,6 @@ public class AtmHomeFrame extends JFrame {
 		panel.add(error, gc);
 		panel.add(error2, gc);
 
-	}
-	
-	public void closeFrame() {
-		this.dispose();
 	}
 
 }

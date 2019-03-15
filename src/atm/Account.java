@@ -2,29 +2,32 @@ package atm;
 
 import static atm.AtmInterface.n;
 
+import java.util.Arrays;
+
+
 class Account {
 
-	private long cardNumber;
-	private int pin;
+	private int[] cardNumber ;
+	private int[] pin; 
 	private String[] history = new String[n];
 	private double balance;
 
 
-	Account(long cardNumber, int pinCode, double initialBalance) {
+	Account(int[] cardNumber, int[] pinCode, double initialBalance) {
 		if (initialBalance > 0.0) {
 			this.balance = initialBalance;
 			this.setHistory(initialBalance + "\t" + "Cr");
 		}
-		this.cardNumber = cardNumber;
-		this.pin = pinCode;
+		this.cardNumber = Arrays.copyOf(cardNumber, cardNumber.length) ;
+		this.pin = Arrays.copyOf(pinCode, pinCode.length) ;
 	}
 
-	void setPin(int newPin) {
-		this.pin = newPin;
+	void setPin(int[] newPin) {
+		this.pin = Arrays.copyOf(newPin, newPin.length) ;
 	}
 
-	boolean checkPin(int pin) {
-		return this.pin == pin;
+	boolean checkPin(int[] pin) {
+		return Arrays.equals(pin, this.pin);
 	}
 
 	void setBalance(double balance) {
@@ -39,8 +42,8 @@ class Account {
 		this.balance += balance;
 	}
 
-	boolean checkCardNumber(long cardNumber) {
-		return this.cardNumber == cardNumber;
+	boolean checkCardNumber(int[] cardNumber) {
+		return Arrays.equals(cardNumber, this.cardNumber);
 	}
 
 	void setHistory(String history) {
@@ -50,6 +53,13 @@ class Account {
 		}
 		// last history is then inserted in array index 0
 		this.history[0] = history;
+	}
+	
+	int[] getCardNumber() {
+		return cardNumber;
+	}
+	int[] getPinNumber() {
+		return pin;
 	}
 
 	String getHistory(int n) {

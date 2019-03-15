@@ -29,11 +29,9 @@ public class PinFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		JPanel panel = new JPanel(new GridBagLayout());
-
 		panel.setBackground(AtmHomeFrame.color);
 		add(panel, BorderLayout.CENTER);
-
-		GridBagConstraints gc = new GridBagConstraints();
+//-----------------------------------------------------------------------------
 
 		JLabel label = new JLabel("PIN CODE");
 		label.setFont(new Font("calibri", Font.PLAIN, 22));
@@ -53,15 +51,17 @@ public class PinFrame extends JFrame {
 		error2.setForeground(Color.RED);
 		error2.setVisible(false);
 		error2.setFont(new Font("calibri", Font.PLAIN, 15));
-
+//-----------------------------------------------------------------------------
 		JButton enterButton = new JButton("ENTER");
 		enterButton.setPreferredSize(AtmHomeFrame.btnsize);
 		enterButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				char[] password = pinField.getPassword();
-				String pin = new String(password);
 				try {
-					int pincode = Integer.parseUnsignedInt(pin);
+					int[] pincode = new int[4];
+					for (int i = 0; i < password.length; i++)
+						pincode[i] = password[i] - '0';
 					if (t.checkPin(account, pincode)) {
 						setVisible(false);
 						new MenuFrame(account, t);
@@ -72,6 +72,9 @@ public class PinFrame extends JFrame {
 				} catch (NumberFormatException e1) {
 					error2.setVisible(true);
 					error.setVisible(false);
+				} catch (IndexOutOfBoundsException e1) {
+					error.setVisible(true);
+					error2.setVisible(false);
 				}
 			}
 
@@ -85,6 +88,8 @@ public class PinFrame extends JFrame {
 				new AtmHomeFrame();
 			}
 		});
+//-----------------------------------------------------------------------------
+		GridBagConstraints gc = new GridBagConstraints();
 
 		gc.gridx = 0;
 		gc.gridy = 0;

@@ -29,12 +29,10 @@ public class MiniSTFrame extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-			
 
 		JPanel panel = new JPanel(new GridBagLayout());
-		
 		panel.setBackground(AtmHomeFrame.color);
-		
+//-----------------------------------------------------------------------------
 		
 		JLabel label = new JLabel("MINI STATEMENT");
 		label.setPreferredSize(new Dimension(160,50));
@@ -44,9 +42,11 @@ public class MiniSTFrame extends JFrame {
 		
 		String str = t.miniStatement(account);
 		JLabel minist = new JLabel(str);
-		System.out.println(str);
+		//System.out.println(str);
 		minist.setPreferredSize(new Dimension(160,160));
 		minist.setFont(new Font("calibri", Font.PLAIN, 20));
+		
+//-----------------------------------------------------------------------------
 		
 		JButton back = new JButton("BACK");
 		back.setPreferredSize(AtmHomeFrame.btnsize);
@@ -56,6 +56,8 @@ public class MiniSTFrame extends JFrame {
 				new MenuFrame(account,t);
 			}
 		});
+		
+//-----------------------------------------------------------------------------
 		GridBagConstraints gc = new GridBagConstraints();
 		
 		gc.anchor = GridBagConstraints.CENTER;

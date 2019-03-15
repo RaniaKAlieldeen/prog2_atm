@@ -21,6 +21,7 @@ public class DepositFrame extends JFrame {
 
 	public DepositFrame(Account account, Transaction t) {
 
+		//setting the frame and panel
 		setTitle("Deposit Page");
 		setSize(AtmHomeFrame.size);
 		setLayout(new BorderLayout());// layout for the frame
@@ -33,7 +34,8 @@ public class DepositFrame extends JFrame {
 		panel.setBackground(AtmHomeFrame.color);
 		add(panel);
 		GridBagConstraints gc = new GridBagConstraints();
-
+//---------------------------------------------------------------------------------
+		//creating components on panel
 		JLabel label = new JLabel("DEPOSIT AMOUNT");
 		label.setPreferredSize(new Dimension(160, 50));
 		label.setFont(new Font("calibri", Font.PLAIN, 20));
@@ -43,15 +45,23 @@ public class DepositFrame extends JFrame {
 		done.setVisible(false);
 		done.setFont(new Font("calibri", Font.PLAIN, 20));
 
-		JLabel error = new JLabel("ERROR: Incorrect Input Format");
+		JLabel error = new JLabel("ERROR: Invalid Amount");
 		error.setPreferredSize(new Dimension(200, 50));
-		error.setForeground(Color.RED);
+		error.setForeground(Color.YELLOW);
 		error.setVisible(false);
+		error.setFont(new Font("calibri", Font.PLAIN, 20));
+
+		JLabel error2 = new JLabel("ERROR: Incorrect Input Format");
+		error2.setPreferredSize(new Dimension(200, 50));
+		error2.setForeground(Color.RED);
+		error2.setVisible(false);
+		error2.setFont(new Font("calibri", Font.PLAIN, 17));
 
 		JTextField amountField = new JTextField();
 		amountField.setPreferredSize(new Dimension(80, 50));
 		amountField.setFont(new Font("calibri", Font.PLAIN, 20));
-
+//----------------------------------------------------------------------------------
+		//buttons and their event handling
 		JButton enterButton = new JButton("ENTER");
 		enterButton.setPreferredSize(AtmHomeFrame.btnsize);
 		enterButton.addActionListener(new ActionListener() {
@@ -60,12 +70,19 @@ public class DepositFrame extends JFrame {
 				// double amount = 0;
 				try {
 					double amount = Double.parseDouble(amountTxt);
-					t.deposit(account, amount);
-					done.setVisible(true);
-					error.setVisible(false);
+					if (t.deposit(account, amount)) {
+						done.setVisible(true);
+						error2.setVisible(false);
+						error.setVisible(false);
+					} else {
+						error.setVisible(true);
+						error2.setVisible(false);
+						done.setVisible(false);
+					}
 				} catch (NumberFormatException e1) {
-					error.setVisible(true);
+					error2.setVisible(true);
 					done.setVisible(false);
+					error.setVisible(false);
 				}
 			}
 		});
@@ -78,7 +95,8 @@ public class DepositFrame extends JFrame {
 				new MenuFrame(account, t);
 			}
 		});
-
+//-----------------------------------------------------------------------------------
+		//layout components in panel
 		gc.anchor = GridBagConstraints.CENTER;
 		gc.gridx = 0;
 		gc.gridy = 0;
@@ -93,6 +111,7 @@ public class DepositFrame extends JFrame {
 		panel.add(back, gc);
 		gc.gridy++;
 		panel.add(done, gc);
+		panel.add(error2, gc);
 		panel.add(error, gc);
 
 	}

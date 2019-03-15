@@ -28,7 +28,7 @@ public class MenuFrame extends JFrame {
 		JPanel panel = new JPanel(new GridBagLayout());
 		add(panel, BorderLayout.CENTER);
 		panel.setBackground(AtmHomeFrame.color);
-
+//-----------------------------------------------------------------------------
 		JButton withdrawB = new JButton("WITHDRAW");
 		withdrawB.setPreferredSize(AtmHomeFrame.btnsize);
 		withdrawB.addActionListener(new ActionListener() {
@@ -89,7 +89,7 @@ public class MenuFrame extends JFrame {
 				new AtmHomeFrame();
 			}
 		});
-
+//-----------------------------------------------------------------------------
 		GridBagConstraints gc = new GridBagConstraints();
 
 		gc.gridx = 0;

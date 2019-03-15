@@ -28,16 +28,11 @@ public class WithdrawFrame extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		JPanel mainPanel = new JPanel();
-		getContentPane().add(mainPanel);
-
 		JPanel panel = new JPanel(new GridBagLayout());
-		mainPanel.add(panel);
-
 		panel.setBackground(AtmHomeFrame.color);
 		add(panel);
 		GridBagConstraints gc = new GridBagConstraints();
-
+//---------------------------------------------------------------------------------
 		JLabel label = new JLabel("WITHDRAW AMOUNT");
 		label.setPreferredSize(new Dimension(190, 50));
 		label.setFont(new Font("calibri", Font.PLAIN, 20));
@@ -46,7 +41,7 @@ public class WithdrawFrame extends JFrame {
 		done.setVisible(false);
 		done.setFont(new Font("calibri", Font.PLAIN, 17));
 
-		JLabel error = new JLabel("Withdraw Failed...Not enough balance");
+		JLabel error = new JLabel("ERROR: Invalid Amount");
 		error.setVisible(false);
 		error.setFont(new Font("calibri", Font.PLAIN, 17));
 		error.setForeground(Color.YELLOW);
@@ -59,7 +54,7 @@ public class WithdrawFrame extends JFrame {
 		JTextField amountField = new JTextField();
 		amountField.setPreferredSize(new Dimension(80, 50));
 		amountField.setFont(new Font("calibri", Font.PLAIN, 20));
-
+//---------------------------------------------------------------------------------
 		JButton enterButton = new JButton("ENTER");
 		enterButton.setPreferredSize(AtmHomeFrame.btnsize);
 		enterButton.addActionListener(new ActionListener() {
@@ -92,7 +87,7 @@ public class WithdrawFrame extends JFrame {
 				new MenuFrame(account, t);
 			}
 		});
-
+//---------------------------------------------------------------------------------
 		gc.gridx = 0;
 		gc.gridy = 0;
 		gc.anchor = GridBagConstraints.CENTER;

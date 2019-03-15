@@ -34,7 +34,7 @@ public class BalanceInqFrame extends JFrame {
 		panel.setBackground(AtmHomeFrame.color);
 		panel.setLayout(new GridBagLayout());
 		add(panel,BorderLayout.CENTER);
-		
+//-----------------------------------------------------------------------------		
 		JLabel label = new JLabel("CURRENT BALANCE");
 		label.setFont(new Font("calibri", Font.PLAIN, 22));
 		label.setPreferredSize(new Dimension(180, 50));
@@ -43,7 +43,7 @@ public class BalanceInqFrame extends JFrame {
 		JLabel balance = new JLabel(str);
 		balance.setFont(new Font("calibri", Font.BOLD, 22));
 		balance.setPreferredSize(new Dimension(100, 50));
-		
+//-----------------------------------------------------------------------------
 		JButton back = new JButton("BACK");
 		back.setPreferredSize(AtmHomeFrame.btnsize);
 		back.addActionListener(new ActionListener() {
@@ -53,7 +53,7 @@ public class BalanceInqFrame extends JFrame {
 			}
 		});
 		
-
+//-----------------------------------------------------------------------------
 		GridBagConstraints gc = new GridBagConstraints();
 		
 		gc.gridx=0;

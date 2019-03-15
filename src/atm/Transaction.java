@@ -8,21 +8,24 @@ public class Transaction implements AtmInterface {
 	private int prevflag = 0;
 	private int nextflag = 0;
 
-	public void deposit(Account account, double amount) {
+	public boolean deposit(Account account, double amount) {
+		if(amount!=0) {
 		account.changeBalance(amount);
 		account.setHistory(amount + "\tCr");
+		return true;
+		} return false;
 	}
 
 	public boolean withdraw(Account account, double amount) {
-
-		if (amount > account.getBalance()) {
-			return false;
-		} else {
-			account.changeBalance(-amount);
-			account.setHistory(amount + "\tDr");
-			return true;
-		}
-
+		if (amount != 0) {
+			if (amount > account.getBalance()) {
+				return false;
+			} else {
+				account.changeBalance(-amount);
+				account.setHistory(amount + "\tDr");
+				return true;
+			}
+		} return false;
 	}
 
 	public String balanceInquiry(Account account) {
@@ -47,7 +50,7 @@ public class Transaction implements AtmInterface {
 		return str;
 	}
 
-	public void changePin(Account account, int newPinCode) {
+	public void changePin(Account account, int[] newPinCode) {
 		account.setPin(newPinCode);
 	}
 
@@ -63,6 +66,7 @@ public class Transaction implements AtmInterface {
 			str = account.getHistory(++current);
 			// System.out.print(str+"\n");
 			nextflag = 0;
+			
 		} else {
 			// System.out.println("earliest history");
 			str = "oldest history reached";
@@ -83,6 +87,7 @@ public class Transaction implements AtmInterface {
 			str = account.getHistory(--current);
 			// System.out.print(str+"\n");
 			prevflag = 0;
+			
 		} else {
 			// System.out.println("no more previous history");
 			str = "newest history reached";
@@ -91,11 +96,11 @@ public class Transaction implements AtmInterface {
 		return str;
 	}
 
-	public boolean checkPin(Account account, int Pin) {
+	public boolean checkPin(Account account, int[] Pin) {
 		return account.checkPin(Pin);
 	}
 
-	public boolean checkCardNumber(Account account, long cardNumber) {
+	public boolean checkCardNumber(Account account, int[] cardNumber) {
 		return account.checkCardNumber(cardNumber);
 	}
 
